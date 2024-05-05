@@ -2,7 +2,7 @@ import React from "react"
 
 const VeriedDetails = ({ data }) => {
   return (
-    <div className="bg-white shadow-lg my-8 w-full h-[150px] pl-4 pt-5 rounded-lg">
+    <div className="bg-white shadow-lg my-4 w-full h-[150px] px-4 pt-5 rounded-lg">
       <div className="flex gap-4">
         <img src={data.img} alt="dataimage" className="w-12" />
         <div className="text">

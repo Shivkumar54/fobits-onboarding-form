@@ -1,4 +1,4 @@
-export const verifyData = [
+export const verificationData = [
   {
     id: 1,
     title: "Manual",

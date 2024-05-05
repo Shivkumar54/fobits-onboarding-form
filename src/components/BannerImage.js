@@ -6,10 +6,11 @@ import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io"
 import { tradingData } from "../data/tradeExperience"
 import TradeExperienceList from "./TradeExperienceList"
 import VerifyDetails from "./VerifyDetails"
-import { verifyData } from "../data/verifyData"
+import { verificationData } from "../data/verifyData"
 import VeriedDetails from "./VeriedDetails"
 import { fetchedDetails } from "../data/fetchedDetails"
 import { Link } from "react-router-dom"
+import userSelector from "../hooks/useSelector"
 const BannerImage = ({
   pages,
   title,
@@ -20,6 +21,8 @@ const BannerImage = ({
   handleChangePrev,
 }) => {
   const [showCar, setShowCar] = useState(false)
+  const [verifyData, setVerifyData] = useState(verificationData)
+  const [expData, setExpData] = useState(tradingData)
   const linkedinLink = `https://www.linkedin.com/in/shivkumar-m-a7a49b205/`
 
   const showCarAfterDelay = () => {
@@ -31,6 +34,13 @@ const BannerImage = ({
   useEffect(() => {
     showCarAfterDelay()
   }, [])
+
+  const handleSelect = (id) => {
+    const updatedData = userSelector(verifyData, id)
+    const updatedExpData = userSelector(expData, id)
+    setVerifyData(updatedData)
+    setExpData(updatedExpData)
+  }
 
   return (
     <div className="bottom-0 overflow-hidden">
@@ -67,8 +77,14 @@ const BannerImage = ({
               </div>
               <div className="lists flex items-center justify-around">
                 {pages === 1 &&
-                  tradingData.map((item) => {
-                    return <TradeExperienceList key={item?.id} data={item} />
+                  expData.map((item) => {
+                    return (
+                      <TradeExperienceList
+                        key={item?.id}
+                        data={item}
+                        handleSelect={handleSelect}
+                      />
+                    )
                   })}
               </div>
               <div className="verify w-full">
@@ -77,7 +93,13 @@ const BannerImage = ({
                     <h1 className="mt-4 ">Verification method</h1>
                     <div className="flex flex-wrap w-full items-center justify-around ">
                       {verifyData.map((item) => {
-                        return <VerifyDetails key={item?.id} data={item} />
+                        return (
+                          <VerifyDetails
+                            key={item?.id}
+                            data={item}
+                            onSelect={handleSelect}
+                          />
+                        )
                       })}
                     </div>
                   </>
@@ -112,7 +134,7 @@ const BannerImage = ({
       </div>
       {pages === 4 && (
         <div className="absolute z-40 top-36 w-full flex flex-col items-center justify-center">
-          <div className="w-96">
+          <div className="mt-6">
             {fetchedDetails?.map((item) => {
               return (
                 <Link key={item?.id} target="_blank" to={linkedinLink}>
