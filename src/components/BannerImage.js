@@ -36,10 +36,12 @@ const BannerImage = ({
   }, [])
 
   const handleSelect = (id) => {
-    const updatedData = userSelector(verifyData, id)
     const updatedExpData = userSelector(expData, id)
-    setVerifyData(updatedData)
     setExpData(updatedExpData)
+  }
+  const handleVerifySelect = (id) => {
+    const updatedData = userSelector(verifyData, id)
+    setVerifyData(updatedData)
   }
 
   return (
@@ -97,7 +99,7 @@ const BannerImage = ({
                           <VerifyDetails
                             key={item?.id}
                             data={item}
-                            onSelect={handleSelect}
+                            onSelect={handleVerifySelect}
                           />
                         )
                       })}
