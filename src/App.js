@@ -1,4 +1,5 @@
 import "./App.css"
+import Body from "./Common/Body"
 import Header from "./Common/Header"
 import MobileStatusBar from "./Common/MobileStatusBar"
 import Main from "./components/Main"
@@ -8,9 +9,7 @@ function App() {
     <div className="h-dvh ">
       <div className="container mx-auto ">
         <BrowserRouter>
-          <MobileStatusBar />
-          <Header />
-          <Main />
+          <Body />
         </BrowserRouter>
       </div>
     </div>
